@@ -15,6 +15,7 @@
 		C5379B1D24EA207B004A5C09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C5379B1B24EA207B004A5C09 /* LaunchScreen.storyboard */; };
 		C5379B2A24EA209A004A5C09 /* libsox.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C5379B2624EA209A004A5C09 /* libsox.a */; };
 		C5379B2B24EA209A004A5C09 /* SoxTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5379B2924EA209A004A5C09 /* SoxTools.swift */; };
+		C5379BA024EBB0E3004A5C09 /* UserDefaultsExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5379B9F24EBB0E3004A5C09 /* UserDefaultsExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		C5379B2724EA209A004A5C09 /* sox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sox.h; sourceTree = "<group>"; };
 		C5379B2924EA209A004A5C09 /* SoxTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoxTools.swift; sourceTree = "<group>"; };
 		C5379B3424EA2151004A5C09 /* Swift_Sox-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swift_Sox-Bridging-Header.h"; sourceTree = "<group>"; };
+		C5379B9F24EBB0E3004A5C09 /* UserDefaultsExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		C5379B2424EA209A004A5C09 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				C5379B9F24EBB0E3004A5C09 /* UserDefaultsExtensions.swift */,
 				C5379B2524EA209A004A5C09 /* libsox */,
 				C5379B2924EA209A004A5C09 /* SoxTools.swift */,
 				C5379B3424EA2151004A5C09 /* Swift_Sox-Bridging-Header.h */,
@@ -168,6 +171,7 @@
 			files = (
 				C5379B2B24EA209A004A5C09 /* SoxTools.swift in Sources */,
 				C5379B1524EA2078004A5C09 /* ViewController.swift in Sources */,
+				C5379BA024EBB0E3004A5C09 /* UserDefaultsExtensions.swift in Sources */,
 				C5379B1124EA2078004A5C09 /* AppDelegate.swift in Sources */,
 				C5379B1324EA2078004A5C09 /* SceneDelegate.swift in Sources */,
 			);

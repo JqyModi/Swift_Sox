@@ -52,9 +52,17 @@ class SoxTools {
         var effect = sox_create_effect(eInput)
         
         // char *const argv[] = UnsafePointer<UnsafeMutablePointer<Int8>?>?
-        let argv: UnsafePointer<UnsafeMutablePointer<Int8>?>? = nil
+        var argv: UnsafePointer<UnsafeMutablePointer<Int8>?>? = nil
         
         // how to convert sourceRead to UnsafePointer<UnsafeMutablePointer<Int8>?>?
+//        let data = Data(buffer: sourceRead)
+        
+        let sourceReadInt8Pointer = sourceRead.withMemoryRebound(to: Int8.self, capacity: MemoryLayout<sox_format_t>.size) { $0 }
+        
+        let sourceReadMutablePointer = UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: MemoryLayout<UnsafeMutablePointer<Int8>?>.size)
+        sourceReadMutablePointer.initialize(to: sourceReadInt8Pointer)
+        
+        argv = UnsafePointer(sourceReadMutablePointer)
 
         sox_effect_options(effect, 1, argv)
         // in out ??
@@ -65,6 +73,11 @@ class SoxTools {
         effect = sox_create_effect(eTempo)
         
         // how to convert speed to UnsafePointer<UnsafeMutablePointer<Int8>?>?
+        let speedInt8Pointer = speed.UTF8CString
+        let speedMutablePointer = UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: MemoryLayout<UnsafeMutablePointer<Int8>?>.size)
+        speedMutablePointer.initialize(to: speedInt8Pointer)
+       
+       argv = UnsafePointer(speedMutablePointer)
         
         sox_effect_options(effect, 1, argv)
         
@@ -75,6 +88,11 @@ class SoxTools {
         effect = sox_create_effect(eOutput)
         
         // how to convert dstWrite to UnsafePointer<UnsafeMutablePointer<Int8>?>?
+        let dstWriteInt8Pointer = dstWrite.withMemoryRebound(to: Int8.self, capacity: MemoryLayout<sox_format_t>.size) { $0 }
+         let dstWriteMutablePointer = UnsafeMutablePointer<UnsafeMutablePointer<Int8>?>.allocate(capacity: MemoryLayout<UnsafeMutablePointer<Int8>?>.size)
+         dstWriteMutablePointer.initialize(to: dstWriteInt8Pointer)
+        
+        argv = UnsafePointer(dstWriteMutablePointer)
         
         sox_effect_options(effect, 1, argv)
         
@@ -97,6 +115,22 @@ class SoxTools {
         outEncoding.deinitialize(count: MemoryLayout<sox_encodinginfo_t>.size)
         outEncoding.deallocate()
         
+        sourceReadMutablePointer.deinitialize(count: MemoryLayout<UnsafeMutablePointer<Int8>?>.size)
+        sourceReadMutablePointer.deallocate()
+        
+        speedMutablePointer.deinitialize(count: MemoryLayout<UnsafeMutablePointer<Int8>?>.size)
+        speedMutablePointer.deallocate()
+        
+        dstWriteMutablePointer.deinitialize(count: MemoryLayout<UnsafeMutablePointer<Int8>?>.size)
+        dstWriteMutablePointer.deallocate()
+        
+        isSuccess = true
+        
         return isSuccess
+    }
+}
+private extension String {
+    var UTF8CString: UnsafeMutablePointer<Int8> {
+        return UnsafeMutablePointer(mutating: (self as NSString).utf8String!)
     }
 }
